@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Number</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="heading">
+    <h2>Guess the Number between 1 and 50!!</h2>
+    </div>
+    <div class="guess">
+      
+      <label class="title"> Enter A Number :</label> 
+    <input type="number" id="number" class="input" placeholder="Enter a Number" >
+    </div>
+    <div class="btn">
+    <button type="submit" onclick="check()" class="submit">Submit</button>
+
+   
+
+</div>
+
+<div class="btn2">
+  
+  <button type="button" title="Reveal the number" onclick="revealNumber()" class="giveup">Give Up</button>
+  
+
+</div>
+<script>
+   let num = Math.floor(Math.random() * 50) + 0; // random integer between 0 and 50
+  let attempts = 0;
+
+  function check() {
+    const input = document.getElementById("number");
+    const val = parseInt(input.value, 10);
+
+    if (isNaN(val)) {
+      alert("Please enter a valid integer.");
+      return;
+    }
+
+    attempts++;
+
+    if (val === num) {
+      alert("You have got it correct. CONGRATS!!");
+      num = Math.floor(Math.random() * 50) + 1;
+      attempts = 0;
+    } else if (val > num) {
+      alert("Your guess is too high!");
+    } else {
+      alert("Your guess is too low!");
+    }
+
+    if (attempts >= 10 && val !== num) {
+      alert("Out of attempts! The correct number was: " + num);
+      num = Math.floor(Math.random() * 50) + 1;
+      attempts = 0;
+    }
+
+    if(attempts==3 && val !== num){
+      if(num%2){
+        alert("Hint:The Number is Divisible by 2")
+      }
+      else if(num%3){
+        alert("Hint:The Number is Divisible by 3")
+      }
+      else if(num%5){
+        alert("Hint:The Number is Divisible by 5")
+      }
+      else{
+        alert("Hint:The Number is not Divisible by 2 , 3 , 5")
+      }
+    }
+
+    if(attempts==4 && val !== num){
+      if(num%6){
+        alert("Hint:The Number is Divisible by 6")
+      }
+      else if(num%10){
+        alert("Hint:The Number is Divisible by 10")
+      }
+      else if(num%13){
+        alert("Hint:The Number is Divisible by 13")
+      }
+      else{
+        alert("Hint:The Number is not Divisible by 6 , 10 , 13")
+      }
+    }
+
+
+
+    input.value = "";
+  }
+  function revealNumber(){
+    if(attempts>=6 && val!==num) {
+      alert("The correct number was: " + num);
+      num = Math.floor(Math.random() * 50) + 1;
+      attempts = 0;
+      document.getElementById("number").value = "";
+    }
+    else{
+      alert("First Try then..");
+      attempts = 0;
+      document.getElementById("number").value = "";
+    }
+  }
+</script>
+</body>
+</html>
